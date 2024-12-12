@@ -1,0 +1,32 @@
+<! -- ticket_app/templates/orders_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders by Server</title>
+</head>
+<body>
+    <h1>Orders for Server {{ server_id }}</h1>
+    <table border="1">
+        <tr>
+            <th>Order ID</th>
+            <th>Table ID</th>
+            <th>Server ID</th>
+            <th>Item ID</th>
+            <th>Quantity</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.order_id }}</td>
+            <td>{{ order.table_id }}</td>
+            <td>{{ order.server_id }}</td>
+            <td>{{ order.item_id }}</td>
+            <td>{{ order.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

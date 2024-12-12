@@ -1,0 +1,28 @@
+<! -- ticket_app/templates/tables_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables by Server</title>
+</head>
+<body>
+    <h1>Tables Managed by Server {{ server_id }}</h1>
+    <table border="1">
+        <tr>
+            <th>Table ID</th>
+            <th>Server ID</th>
+            <th>Number of People</th>
+        </tr>
+        {% for table in tables %}
+        <tr>
+            <td>{{ table.table_id }}</td>
+            <td>{{ table.server_id }}</td>
+            <td>{{ table.num_people }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

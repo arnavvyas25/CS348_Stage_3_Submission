@@ -7,7 +7,7 @@
 </head>
 <body>
  <h1>Restaurant Tickets</h1>
- 
+
  <h2>Orders</h2>
  <h3>Order ID - Table ID - Server ID - Item ID - Quantity</h3>
  <ul>
@@ -56,9 +56,17 @@
  <ul>
     {% for item in Items %}
     <li>
-        {{ item.item_id }} - {{ item.name }} - {{ item.station_id}}
+        {{ item.item_id }} - {{ item.name }} - {{ item.station_id }}
     </li>
     {% endfor %}
  </ul>
+
+ <!-- Buttons to access prepared statement queries -->
+ <h2>Prepared Statement Queries</h2>
+ <div>
+    <button onclick="location.href='{% url 'orders_by_server' server_id=1 %}'">View Orders by Server</button>
+    <button onclick="location.href='{% url 'tables_by_server' server_id=1 %}'">View Tables by Server</button>
+    <button onclick="location.href='{% url 'items_by_station' station_id=1 %}'">View Items by Station</button>
+ </div>
 </body>
 </html>

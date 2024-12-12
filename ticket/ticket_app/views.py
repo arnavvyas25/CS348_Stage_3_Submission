@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView
 from ticket_app.models import *
 from ticket_app.forms import OrderForm
 from django.urls import reverse_lazy
+from ticket_app.queries import Queries
 
 # Create your views here.
 
@@ -49,6 +50,9 @@ class OrderUpdateView(UpdateView):
     template_name = 'order_edit.html'
     success_url = reverse_lazy('home')
 
+    def get_queryset(self):
+        return Order.objects.all()
+
     def form_valid(self, form):
         return super().form_valid(form)
 
@@ -59,3 +63,40 @@ class OrderDeleteView(DeleteView):
 
     def form_valid(self, form):
         return super().form_valid(form)
+    
+# prepared statements
+def orders_by_server(request, server_id):
+    orders = Queries.get_orders_by_server_id(server_id)
+    return render(request, 'orders_list.html', {'orders': orders})
+
+def tables_by_server(request, server_id):
+    tables = Queries.get_tables_by_server_id(server_id)
+    return render(request, 'tables_list.html', {'tables': tables})
+
+def items_by_station(request, station_id):
+    items = Queries.get_items_by_station_id(station_id)
+    return render(request, 'items_list.html', {'items': items})
+
+class OrdersByServerView(TemplateView):
+    template_name = 'orders_list.html'
+
+    def get(self, request, server_id, *args, **kwargs):
+        orders = Queries.get_orders_by_server_id(server_id)
+        context = {'orders': orders, 'server_id': server_id}
+        return render(request, self.template_name, context)
+
+class TablesByServerView(TemplateView):
+    template_name = 'tables_list.html'
+
+    def get(self, request, server_id, *args, **kwargs):
+        tables = Queries.get_tables_by_server_id(server_id)
+        context = {'tables': tables, 'server_id': server_id}
+        return render(request, self.template_name, context)
+
+class ItemsByStationView(TemplateView):
+    template_name = 'items_list.html'
+
+    def get(self, request, station_id, *args, **kwargs):
+        items = Queries.get_items_by_station_id(station_id)
+        context = {'items': items, 'station_id': station_id}
+        return render(request, self.template_name, context)

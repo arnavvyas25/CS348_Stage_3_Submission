@@ -1,0 +1,28 @@
+<! -- ticket_app/templates/items_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items by Station</title>
+</head>
+<body>
+    <h1>Items Prepared at Station {{ station_id }}</h1>
+    <table border="1">
+        <tr>
+            <th>Item ID</th>
+            <th>Item Name</th>
+            <th>Station ID</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.item_id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.station_id }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

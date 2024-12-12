@@ -28,4 +28,7 @@ urlpatterns = [
     path('order/add/', OrderCreateView.as_view(), name='order_add'),
     path('order/edit/<int:pk>/', OrderUpdateView.as_view(), name='order_edit'),
     path('order/delete/<int:pk>/', OrderDeleteView.as_view(), name='order_delete'),
+    path('orders-by-server/<int:server_id>/', OrdersByServerView.as_view(), name='orders_by_server'),
+    path('tables-by-server/<int:server_id>/', TablesByServerView.as_view(), name='tables_by_server'),
+    path('items-by-station/<int:station_id>/', ItemsByStationView.as_view(), name='items_by_station'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
