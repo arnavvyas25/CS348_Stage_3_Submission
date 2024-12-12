@@ -1,0 +1,30 @@
+<! -- ticket_app/templates/order_edit.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Order Edit</title>
+</head>
+<body>
+ <h1>Order Edit</h1>
+ <form method="POST" action="{% url 'order_edit' order.order_id %}">
+    {% csrf_token %}
+    <label for="table_id">Table ID:</label>
+    <input type="number" name="table_id" value="{{ order.table_id }}" required>
+     
+    <label for="server_id">Server ID:</label>
+    <input type="number" name="server_id" value="{{ order.server_id }}" required>
+     
+    <label for="item_id">Item ID:</label>
+    <input type="number" name="item_id" value="{{ order.item_id }}" required>
+     
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" value="{{ order.quantity }}" required>
+     
+    <button type="submit">Submit Order</button>
+ </form>
+
+</body>
+</html>

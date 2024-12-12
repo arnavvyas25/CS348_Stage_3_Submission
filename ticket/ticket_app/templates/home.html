@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Home</title>
+</head>
+<body>
+ <h1>Restaurant Tickets</h1>
+ 
+ <h2>Orders</h2>
+ <h3>Order ID - Table ID - Server ID - Item ID - Quantity</h3>
+ <ul>
+    {% for order in Orders %}
+    <li>
+        {{ order.order_id }} - {{ order.table_id }} - {{ order.server_id }} - {{ order.item_id }} - {{ order.quantity }}
+        <a href="{% url 'order_edit' order.order_id %}">Edit</a> |
+        <a href="{% url 'order_delete' order.order_id %}">Delete</a>
+    </li>
+    {% endfor %}
+ </ul>
+ <a href="{% url 'order_add' %}">Add New Order</a>
+
+ <h2>Tables</h2>
+ <h3>Table ID - Server ID - Number of People</h3>
+ <ul>
+    {% for table in Tables %}
+    <li>
+        {{ table.table_id }} - {{ table.server_id }} - {{ table.num_people }}
+    </li>
+    {% endfor %}
+ </ul>
+
+ <h2>Servers</h2>
+ <h3>Server ID - Name</h3>
+ <ul>
+    {% for server in Servers %}
+    <li>
+        {{ server.server_id }} - {{ server.name }}
+    </li>
+    {% endfor %}
+ </ul>
+
+ <h2>Stations</h2>
+ <h3>Station ID - Name</h3>
+ <ul>
+    {% for station in Stations %}
+    <li>
+        {{ station.station_id }} - {{ station.name }}
+    </li>
+    {% endfor %}
+ </ul>
+
+ <h2>Items</h2>
+ <h3>Item ID - Name - Station ID</h3>
+ <ul>
+    {% for item in Items %}
+    <li>
+        {{ item.item_id }} - {{ item.name }} - {{ item.station_id}}
+    </li>
+    {% endfor %}
+ </ul>
+</body>
+</html>
