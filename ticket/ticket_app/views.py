@@ -81,7 +81,7 @@ class OrdersByServerView(TemplateView):
     template_name = 'orders_list.html'
 
     def get(self, request, server_id, *args, **kwargs):
-        orders = Queries.get_orders_by_server_id(server_id)
+        orders = Order.objects.filter(server_id=server_id)
         context = {'orders': orders, 'server_id': server_id}
         return render(request, self.template_name, context)
 
@@ -89,7 +89,7 @@ class TablesByServerView(TemplateView):
     template_name = 'tables_list.html'
 
     def get(self, request, server_id, *args, **kwargs):
-        tables = Queries.get_tables_by_server_id(server_id)
+        tables = Table.objects.filter(server_id=server_id)
         context = {'tables': tables, 'server_id': server_id}
         return render(request, self.template_name, context)
 
@@ -97,6 +97,6 @@ class ItemsByStationView(TemplateView):
     template_name = 'items_list.html'
 
     def get(self, request, station_id, *args, **kwargs):
-        items = Queries.get_items_by_station_id(station_id)
+        items = Item.objects.filter(station_id=station_id)
         context = {'items': items, 'station_id': station_id}
         return render(request, self.template_name, context)
